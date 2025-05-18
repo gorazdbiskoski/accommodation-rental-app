@@ -67,4 +67,32 @@ public class AccommodationController {
         boolean rented = accommodationApplicationService.rentById(id);
         return ResponseEntity.ok(rented);
     }
+
+    @PostMapping("/reserve/{id}")
+    @Operation(summary = "Add a reservation to the list of potential reservations")
+    public ResponseEntity<?> reserve(@PathVariable Long id) {
+        accommodationApplicationService.addReservation(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/remove-reservation/{id}")
+    @Operation(summary = "Removes a reservation from the list of potential reservations")
+    public ResponseEntity<?> removeReservation(@PathVariable Long id) {
+        accommodationApplicationService.removeReservation(id);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/finalize-reservations")
+    @Operation(summary = "Finalize all of the reservations from the users list")
+    public ResponseEntity<?> finalizeAllReservations() {
+        accommodationApplicationService.finalizeAllReservations();
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/preview-reservations")
+    @Operation(summary = "Retrieves all of the pre-reserved accommodations from the users list")
+    public ResponseEntity<List<DisplayAccommodationDto>> findAllPreReserved() {
+        List<DisplayAccommodationDto> accommodationDtos = accommodationApplicationService.viewAllReservations();
+        return ResponseEntity.ok(accommodationDtos);
+    }
 }

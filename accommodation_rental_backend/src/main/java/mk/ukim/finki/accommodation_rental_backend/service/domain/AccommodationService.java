@@ -14,4 +14,9 @@ public interface AccommodationService {
     void deleteById(Long id);
 
     boolean rentById(Long id);
+
+    void addReservation(Long id);
+    void removeReservation(Long id);
+    void finalizeAllReservations();
+    List<Accommodation> viewAllReservations();
 }

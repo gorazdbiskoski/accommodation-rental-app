@@ -2,6 +2,7 @@ package mk.ukim.finki.accommodation_rental_backend.service.application.impl;
 
 import mk.ukim.finki.accommodation_rental_backend.dto.CreateAccommodationDto;
 import mk.ukim.finki.accommodation_rental_backend.dto.DisplayAccommodationDto;
+import mk.ukim.finki.accommodation_rental_backend.model.domain.Accommodation;
 import mk.ukim.finki.accommodation_rental_backend.model.domain.Host;
 import mk.ukim.finki.accommodation_rental_backend.service.application.AccommodationApplicationService;
 import mk.ukim.finki.accommodation_rental_backend.service.domain.AccommodationService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class AccommodationApplicationServiceImpl implements AccommodationApplicationService {
@@ -60,5 +62,28 @@ public class AccommodationApplicationServiceImpl implements AccommodationApplica
     @Override
     public boolean rentById(Long id) {
         return accommodationService.rentById(id);
+    }
+
+    @Override
+    public void addReservation(Long id) {
+        accommodationService.addReservation(id);
+    }
+
+    @Override
+    public void removeReservation(Long id) {
+        accommodationService.removeReservation(id);
+    }
+
+    @Override
+    public void finalizeAllReservations() {
+        accommodationService.finalizeAllReservations();;
+    }
+
+    @Override
+    public List<DisplayAccommodationDto> viewAllReservations() {
+        return accommodationService.viewAllReservations()
+                .stream()
+                .map(DisplayAccommodationDto::from)
+                .toList();
     }
 }

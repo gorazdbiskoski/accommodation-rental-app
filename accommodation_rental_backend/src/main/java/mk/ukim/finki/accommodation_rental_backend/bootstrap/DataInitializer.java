@@ -1,13 +1,17 @@
-package mk.ukim.finki.accommodation_rental_backend.config;
+package mk.ukim.finki.accommodation_rental_backend.bootstrap;
 
 import jakarta.annotation.PostConstruct;
 import mk.ukim.finki.accommodation_rental_backend.model.domain.Accommodation;
 import mk.ukim.finki.accommodation_rental_backend.model.domain.Country;
 import mk.ukim.finki.accommodation_rental_backend.model.domain.Host;
+import mk.ukim.finki.accommodation_rental_backend.model.domain.User;
 import mk.ukim.finki.accommodation_rental_backend.model.enums.Category;
+import mk.ukim.finki.accommodation_rental_backend.model.enums.Role;
 import mk.ukim.finki.accommodation_rental_backend.repository.AccommodationRepository;
 import mk.ukim.finki.accommodation_rental_backend.repository.CountryRepository;
 import mk.ukim.finki.accommodation_rental_backend.repository.HostRepository;
+import mk.ukim.finki.accommodation_rental_backend.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -18,11 +22,15 @@ public class DataInitializer {
     private final CountryRepository countryRepository;
     private final HostRepository hostRepository;
     private final AccommodationRepository accommodationRepository;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public DataInitializer(CountryRepository countryRepository, HostRepository hostRepository, AccommodationRepository accommodationRepository) {
+    public DataInitializer(CountryRepository countryRepository, HostRepository hostRepository, AccommodationRepository accommodationRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.countryRepository = countryRepository;
         this.hostRepository = hostRepository;
         this.accommodationRepository = accommodationRepository;
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -56,5 +64,13 @@ public class DataInitializer {
             accommodations.add(new Accommodation("Just a room", Category.ROOM, hosts.get(3), 1, false));
         }
         accommodationRepository.saveAll(accommodations);
+
+        List<User> users = new ArrayList<>();
+        if(userRepository.count() == 0)
+        {
+            users.add(new User("gb", passwordEncoder.encode("pass"), "Gorazd", Role.ROLE_USER));
+            users.add(new User("admin", passwordEncoder.encode("pass"), "Admin", Role.ROLE_HOST));
+        }
+        userRepository.saveAll(users);
     }
 }
