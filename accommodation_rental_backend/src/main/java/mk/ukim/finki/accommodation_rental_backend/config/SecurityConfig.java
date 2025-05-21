@@ -2,6 +2,7 @@ package mk.ukim.finki.accommodation_rental_backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -15,13 +16,14 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
 
+@Profile("test")
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
-    private final CustomAuthProvider authenticationProvider;
+    private final CustomUsernamePasswordAuthenticationProvider authenticationProvider;
 
-    public SecurityConfig(CustomAuthProvider authenticationProvider) {
+    public SecurityConfig(CustomUsernamePasswordAuthenticationProvider authenticationProvider) {
         this.authenticationProvider = authenticationProvider;
     }
 

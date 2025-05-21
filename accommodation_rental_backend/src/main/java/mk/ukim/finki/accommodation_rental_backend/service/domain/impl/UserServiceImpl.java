@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -60,8 +62,15 @@ public class UserServiceImpl implements UserService {
             //TODO: Make Exception
             throw new IllegalArgumentException("Username and password cannot be empty");
         }
-        //TODO: Make Exception
-        return userRepository.findByUsernameAndPassword(username, password).orElseThrow(() -> new UsernameNotFoundException(username));
+
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username));
+
+        if(!passwordEncoder.matches(password, user.getPassword()))
+        {
+            throw new IllegalArgumentException("Wrong password");
+        }
+        return user;
     }
 
     @Override
@@ -73,5 +82,10 @@ public class UserServiceImpl implements UserService {
             //TODO: Make Exception
             //throw new AuthenticationException();
         }
+    }
+
+    @Override
+    public List<User> fetchAll() {
+        return userRepository.fetchAll();
     }
 }

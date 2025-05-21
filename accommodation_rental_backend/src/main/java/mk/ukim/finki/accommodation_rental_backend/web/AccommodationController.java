@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import mk.ukim.finki.accommodation_rental_backend.dto.CreateAccommodationDto;
 import mk.ukim.finki.accommodation_rental_backend.dto.DisplayAccommodationDto;
+import mk.ukim.finki.accommodation_rental_backend.model.views.AccommodationsPerHostView;
 import mk.ukim.finki.accommodation_rental_backend.service.application.AccommodationApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -94,5 +95,10 @@ public class AccommodationController {
     public ResponseEntity<List<DisplayAccommodationDto>> findAllPreReserved() {
         List<DisplayAccommodationDto> accommodationDtos = accommodationApplicationService.viewAllReservations();
         return ResponseEntity.ok(accommodationDtos);
+    }
+
+    @GetMapping("/api/accommodations/by-host")
+    public ResponseEntity<List<AccommodationsPerHostView>> getAccommodationsPerHostView() {
+        return ResponseEntity.ok(accommodationApplicationService.getAccommodationsPerHostView());
     }
 }

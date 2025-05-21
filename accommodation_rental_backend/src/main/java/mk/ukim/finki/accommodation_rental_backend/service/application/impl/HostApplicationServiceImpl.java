@@ -3,6 +3,8 @@ package mk.ukim.finki.accommodation_rental_backend.service.application.impl;
 import mk.ukim.finki.accommodation_rental_backend.dto.CreateHostDto;
 import mk.ukim.finki.accommodation_rental_backend.dto.DisplayHostDto;
 import mk.ukim.finki.accommodation_rental_backend.model.domain.Country;
+import mk.ukim.finki.accommodation_rental_backend.model.projections.HostProjection;
+import mk.ukim.finki.accommodation_rental_backend.model.views.HostsPerCountryView;
 import mk.ukim.finki.accommodation_rental_backend.service.application.HostApplicationService;
 import mk.ukim.finki.accommodation_rental_backend.service.domain.CountryService;
 import mk.ukim.finki.accommodation_rental_backend.service.domain.HostService;
@@ -51,5 +53,15 @@ public class HostApplicationServiceImpl implements HostApplicationService {
     @Override
     public void deleteById(Long id) {
         hostService.deleteById(id);
+    }
+
+    @Override
+    public List<HostsPerCountryView> getHostsPerCountryView() {
+        return hostService.getHostsPerCountryView();
+    }
+
+    @Override
+    public List<HostProjection> findAllHostsNames() {
+        return hostService.findAllHostsNames();
     }
 }

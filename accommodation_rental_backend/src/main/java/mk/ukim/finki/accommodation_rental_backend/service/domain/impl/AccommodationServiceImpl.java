@@ -3,7 +3,9 @@ package mk.ukim.finki.accommodation_rental_backend.service.domain.impl;
 import mk.ukim.finki.accommodation_rental_backend.model.domain.Accommodation;
 import mk.ukim.finki.accommodation_rental_backend.model.domain.User;
 import mk.ukim.finki.accommodation_rental_backend.model.exception.AccommodationOutOfSpaceException;
+import mk.ukim.finki.accommodation_rental_backend.model.views.AccommodationsPerHostView;
 import mk.ukim.finki.accommodation_rental_backend.repository.AccommodationRepository;
+import mk.ukim.finki.accommodation_rental_backend.repository.AccommodationsPerHostViewRepository;
 import mk.ukim.finki.accommodation_rental_backend.repository.UserRepository;
 import mk.ukim.finki.accommodation_rental_backend.service.domain.AccommodationService;
 import org.springframework.security.core.Authentication;
@@ -16,10 +18,12 @@ import java.util.Optional;
 @Service
 public class AccommodationServiceImpl implements AccommodationService {
     private final AccommodationRepository accommodationRepository;
+    private final AccommodationsPerHostViewRepository accommodationsPerHostViewRepository;
     private final UserRepository userRepository;
 
-    public AccommodationServiceImpl(AccommodationRepository accommodationRepository, UserRepository userRepository) {
+    public AccommodationServiceImpl(AccommodationRepository accommodationRepository, AccommodationsPerHostViewRepository accommodationsPerHostViewRepository, UserRepository userRepository) {
         this.accommodationRepository = accommodationRepository;
+        this.accommodationsPerHostViewRepository = accommodationsPerHostViewRepository;
         this.userRepository = userRepository;
     }
 
@@ -139,5 +143,15 @@ public class AccommodationServiceImpl implements AccommodationService {
         }
 
         return  (User) authentication.getPrincipal();
+    }
+
+    @Override
+    public List<AccommodationsPerHostView> getAccommodationsPerHostView() {
+        return accommodationsPerHostViewRepository.findAll();
+    }
+
+    @Override
+    public void refreshAccommodationsPerHostView() {
+        accommodationsPerHostViewRepository.refreshMaterializedView();
     }
 }

@@ -3,6 +3,8 @@ package mk.ukim.finki.accommodation_rental_backend.web;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import mk.ukim.finki.accommodation_rental_backend.dto.CreateHostDto;
 import mk.ukim.finki.accommodation_rental_backend.dto.DisplayHostDto;
+import mk.ukim.finki.accommodation_rental_backend.model.projections.HostProjection;
+import mk.ukim.finki.accommodation_rental_backend.model.views.HostsPerCountryView;
 import mk.ukim.finki.accommodation_rental_backend.service.application.HostApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +55,15 @@ public class HostController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         hostApplicationService.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/by-country")
+    public ResponseEntity<List<HostsPerCountryView>> getHostsPerCountryView() {
+        return ResponseEntity.ok(hostApplicationService.getHostsPerCountryView());
+    }
+
+    @GetMapping("/names")
+    public ResponseEntity<List<HostProjection>> getHostsNames() {
+        return ResponseEntity.ok(hostApplicationService.findAllHostsNames());
     }
 }

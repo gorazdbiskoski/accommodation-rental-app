@@ -33,6 +33,10 @@ public class User implements UserDetails {
     private Role role;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_reservations",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "reservations_id"))
     List<Accommodation> reservations;
 
     private boolean isAccountNonExpired = true;
