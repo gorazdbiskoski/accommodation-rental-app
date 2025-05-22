@@ -6,6 +6,7 @@ import mk.ukim.finki.accommodation_rental_backend.model.enums.Category;
 import java.util.List;
 
 public record DisplayAccommodationDto(
+        Long id,
         String name,
         Category category,
         DisplayHostDto host,
@@ -17,6 +18,7 @@ public record DisplayAccommodationDto(
         if(accommodation != null)
         {
             return new DisplayAccommodationDto(
+                    accommodation.getId(),
                     accommodation.getName(),
                     accommodation.getCategory(),
                     DisplayHostDto.from(accommodation.getHost()),

@@ -54,17 +54,25 @@ public class JwtSecurityWebConfig {
                                         "/swagger-ui/**",
                                         "/v3/api-docs/**",
                                         "/api/auth/register",
-                                        "/api/auth/login"
-                                )
-                                .permitAll()
-                                .requestMatchers(
+                                        "/api/auth/login",
+                                        "/test/test/test/test/test/test/test/test",
                                         "/api/country",
                                         "/api/host",
-                                        "/api/accommodation"
+                                        "/api/accommodation",
+                                        "/api/country/**",
+                                        "/api/host/**",
+                                        "/api/accommodation/**"
                                 )
-                                .hasAnyRole("USER", "HOST")
-                                .anyRequest()
-                                .hasRole("HOST")
+                                .permitAll()
+                                .anyRequest().permitAll()
+//                                .requestMatchers(
+//                                        "/api/country",
+//                                        "/api/host",
+//                                        "/api/accommodation"
+//                                )
+//                                .hasAnyRole("USER", "HOST")
+//                                .anyRequest()
+//                                .hasRole("HOST")
                 )
                 .sessionManagement(sessionManagementConfigurer ->
                         sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -37,7 +37,7 @@ public class AccommodationApplicationServiceImpl implements AccommodationApplica
 
     @Override
     public Optional<DisplayAccommodationDto> save(CreateAccommodationDto accommodation) {
-        Host host = hostService.findById(accommodation.hostId()).orElse(null);
+        Host host = hostService.findById(accommodation.host()).orElse(null);
 
         return accommodationService.save(accommodation.toEntity(host))
                 .map(DisplayAccommodationDto::from);
@@ -46,9 +46,9 @@ public class AccommodationApplicationServiceImpl implements AccommodationApplica
     @Override
     public Optional<DisplayAccommodationDto> update(CreateAccommodationDto accommodation, Long id) {
         Host host = null;
-        if(accommodation.hostId() != null && hostService.findById(accommodation.hostId()).isPresent())
+        if(accommodation.host() != null && hostService.findById(accommodation.host()).isPresent())
         {
-            host = hostService.findById(accommodation.hostId()).get();
+            host = hostService.findById(accommodation.host()).get();
         }
 
         return accommodationService.update(accommodation.toEntity(host), id)

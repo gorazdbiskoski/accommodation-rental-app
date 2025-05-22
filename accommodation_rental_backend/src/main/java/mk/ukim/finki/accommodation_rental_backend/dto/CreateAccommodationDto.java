@@ -7,7 +7,7 @@ import mk.ukim.finki.accommodation_rental_backend.model.enums.Category;
 public record CreateAccommodationDto(
         String name,
         Category category,
-        Long hostId,
+        Long host,
         Integer numRooms,
         Boolean isAvailable
 ) {

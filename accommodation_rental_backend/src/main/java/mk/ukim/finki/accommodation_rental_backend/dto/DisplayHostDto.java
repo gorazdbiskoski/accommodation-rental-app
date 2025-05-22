@@ -5,6 +5,7 @@ import mk.ukim.finki.accommodation_rental_backend.model.domain.Host;
 import java.util.List;
 
 public record DisplayHostDto(
+        Long id,
         String name,
         String surname,
         DisplayCountryDto country
@@ -13,6 +14,7 @@ public record DisplayHostDto(
         if(host != null)
         {
             return new DisplayHostDto(
+                    host.getId(),
                     host.getName(),
                     host.getSurname(),
                     DisplayCountryDto.from(host.getCountry())

@@ -36,7 +36,7 @@ public class HostApplicationServiceImpl implements HostApplicationService {
 
     @Override
     public Optional<DisplayHostDto> save(CreateHostDto host) {
-        Country country = countryService.findById(host.countryId()).orElse(null);
+        Country country = countryService.findById(host.country()).orElse(null);
 
         return hostService.save(host.toEntity(country))
                 .map(DisplayHostDto::from);
@@ -44,7 +44,7 @@ public class HostApplicationServiceImpl implements HostApplicationService {
 
     @Override
     public Optional<DisplayHostDto> update(CreateHostDto host, Long id) {
-        Country country = countryService.findById(host.countryId()).orElse(null);
+        Country country = countryService.findById(host.country()).orElse(null);
 
         return hostService.update(host.toEntity(country), id)
                 .map(DisplayHostDto::from);

@@ -6,7 +6,7 @@ import mk.ukim.finki.accommodation_rental_backend.model.domain.Host;
 public record CreateHostDto(
         String name,
         String surname,
-        Long countryId
+        Long country
 ) {
     public Host toEntity(Country country) {
         return new Host(

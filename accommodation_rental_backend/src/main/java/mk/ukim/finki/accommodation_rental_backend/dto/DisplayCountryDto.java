@@ -5,13 +5,14 @@ import mk.ukim.finki.accommodation_rental_backend.model.domain.Country;
 import java.util.List;
 
 public record DisplayCountryDto(
+        Long id,
         String name,
         String continent
 ) {
     public static DisplayCountryDto from(Country country) {
         if (country != null)
         {
-            return new DisplayCountryDto(country.getName(), country.getContinent());
+            return new DisplayCountryDto(country.getId(), country.getName(), country.getContinent());
         }
         return null;
     }
