@@ -1,10 +1,17 @@
-import {Button} from "@mui/material";
+import {Button, Switch} from "@mui/material";
 import {useState} from "react";
 import {EditAccommodationDialog} from "../AccommodationDialog/EditAccommodationDialog.jsx";
 import {DeleteAccommodationDialog} from "../AccommodationDialog/DeleteAccommodationDialog.jsx";
 
 export const Accommodation = (props) => {
     const {accommodation, hosts, onUpdate, onDelete} = props;
+    const [formData, setFormData] = useState({
+        "name": accommodation.name,
+        "category": accommodation.category,
+        "host": accommodation.host.id,
+        "numRooms": accommodation.numRooms,
+        "isAvailable": accommodation.isAvailable,
+    });
 
     const [editAccommodationDialog, setEditAccommodationDialog] = useState(false);
     const [deleteAccommodationDialog, setDeleteAccommodationDialog] = useState(false);
@@ -15,7 +22,20 @@ export const Accommodation = (props) => {
             <td>{accommodation.category}</td>
             <td>{accommodation.host.name}</td>
             <td>{accommodation.numRooms}</td>
-            <td>{accommodation.isAvailable}</td>
+            <td>{accommodation.isAvailable.toString()}</td>
+            <td>
+                <Switch
+                        checked={formData.isAvailable}
+                        onChange={() => {
+                            const updatedData = {
+                                ...formData,
+                                isAvailable: !formData.isAvailable
+                            };
+                            setFormData(updatedData);
+                            onUpdate(accommodation.id, updatedData);
+                        }}
+                />
+            </td>
             <td className="text-end">
                 <Button
                     variant="outlined"

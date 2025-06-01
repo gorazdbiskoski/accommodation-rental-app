@@ -5,8 +5,9 @@ import {
     DialogActions,
     DialogContent,
     DialogTitle, FormControl, InputLabel, MenuItem, Select,
-    TextField
+    TextField, ToggleButton
 } from "@mui/material";
+import CheckIcon from '@mui/icons-material/Check';
 import {useCategories} from "../../../../hooks/useCategories.js";
 
 
@@ -26,11 +27,14 @@ export const EditAccommodationDialog = ({accommodation, hosts , open, onClose, o
         setFormData({...formData, [name]: value});
     };
 
+    const handleAvailabilityChange = () => {
+        setFormData({ ...formData, isAvailable: !formData.isAvailable })
+    }
+
     const handleSubmit = () => {
         onEdit(accommodation.id, formData);
         setFormData(formData);
         onClose();
-        console.log(formData)
     };
 
     return (
@@ -80,6 +84,14 @@ export const EditAccommodationDialog = ({accommodation, hosts , open, onClose, o
                         ))}
                     </Select>
                 </FormControl>
+                <ToggleButton
+                    value="check"
+                    color="warning"
+                    selected={formData.isAvailable}
+                    onChange={handleAvailabilityChange}
+                >
+                    <CheckIcon />
+                </ToggleButton>
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Cancel</Button>

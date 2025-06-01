@@ -61,6 +61,10 @@ public class AccommodationServiceImpl implements AccommodationService {
             {
                 oldAccommodation.setNumRooms(accommodation.getNumRooms());
             }
+            if(accommodation.getIsAvailable() != null)
+            {
+                oldAccommodation.setIsAvailable(accommodation.getIsAvailable());
+            }
             return accommodationRepository.save(oldAccommodation);
         });
     }

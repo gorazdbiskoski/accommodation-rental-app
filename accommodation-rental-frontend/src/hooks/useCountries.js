@@ -9,6 +9,7 @@ export const useCountries = () => {
     const [state, setState] = useState(initialState)
 
     const fetchCountries = useCallback(() => {
+        setState(initialState);
         countryRepository
             .findAll()
             .then(response => {
@@ -16,6 +17,7 @@ export const useCountries = () => {
                     countries: response.data,
                     loading: false,
                 })
+                console.log(response.data)
             })
             .catch(error => console.log(error))
     }, [])
