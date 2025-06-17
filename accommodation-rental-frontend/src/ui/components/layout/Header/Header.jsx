@@ -1,25 +1,27 @@
+import { AppBar, Toolbar, Typography, Box, Button } from "@mui/material";
 import {Link} from "react-router-dom"
 
 export const Header = () => {
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div className="container-fluid">
-                <Link className="navbar-brand" to="/">AccommodationsApp</Link>
-                <div className="collapse navbar-collapse" id="navbarNav">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link to="/accommodations" className="nav-link">Accommodations</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/hosts" className="nav-link">Hosts</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link to="/countries" className="nav-link">Countries</Link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <AppBar position="static" color="primary" elevation={4}>
+            <Toolbar>
+                <Typography variant="h6" component={Link} to="/" style={{ textDecoration: 'none', color: 'inherit', flexGrow: 1 }}>
+                    AccommodationsApp
+                </Typography>
+
+                <Box>
+                    <Button component={Link} to="/accommodations" color="inherit">
+                        Accommodations
+                    </Button>
+                    <Button component={Link} to="/hosts" color="inherit">
+                        Hosts
+                    </Button>
+                    <Button component={Link} to="/countries" color="inherit">
+                        Countries
+                    </Button>
+                </Box>
+            </Toolbar>
+        </AppBar>
     )
 }
