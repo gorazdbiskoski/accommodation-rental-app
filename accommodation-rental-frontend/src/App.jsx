@@ -16,6 +16,7 @@ function App() {
               <Route path={"/accommodations"} element={<AccommodationsPage/>} />
               <Route path={"/hosts"} element={<HostsPage/>} />
               <Route path={"/countries"} element={<CountriesPage/>} />
+              {/*TODO: Implement SignIn and SignInPage*/}
               {/*<Route path={"/signin"} element={<SignInPage/>}></Route>*/}
           </Routes>
       </BrowserRouter>
