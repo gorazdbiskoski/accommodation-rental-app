@@ -1,6 +1,5 @@
 # To run this type:
 # docker-compose -f docker.compose.database.only.yaml up -d
-# Test
 
 services:
   db:
