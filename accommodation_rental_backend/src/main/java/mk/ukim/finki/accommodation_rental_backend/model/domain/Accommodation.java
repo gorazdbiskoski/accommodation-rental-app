@@ -9,6 +9,7 @@ import mk.ukim.finki.accommodation_rental_backend.model.enums.Category;
 @Entity
 @NoArgsConstructor
 public class Accommodation {
+    // GenerationType.IDENTITY tells Hibernate to expect auto-incremented values FROM Postgres
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
