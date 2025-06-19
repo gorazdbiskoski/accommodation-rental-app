@@ -37,4 +37,4 @@ jobs:
           context: ./accommodation_rental_backend
           file: ./accommodation_rental_backend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_USERNAME }}/accommodations_frontend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/accommodations_backend:latest
