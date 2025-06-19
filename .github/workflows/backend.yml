@@ -18,6 +18,10 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Build with Maven
+        working-directory: ./accommodation_rental_backend
+        run: mvn clean package -DskipTests
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
