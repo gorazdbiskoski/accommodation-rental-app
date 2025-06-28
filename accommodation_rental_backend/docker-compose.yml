@@ -13,7 +13,7 @@ services:
     ports:
       - "2345:5432"
   backend:
-    image: gorazdbiskoski/accommodations-backend:latest
+    image: gorazdbiskoski/accommodations_backend:latest
     depends_on:
       - db
     restart: always
