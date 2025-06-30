@@ -2,6 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: accommodation-ingress
+  namespace: accommodations-app
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:

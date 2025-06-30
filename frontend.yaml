@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: frontend-deployment
+  namespace: accommodations-app
   labels:
     app: frontend
 spec:
@@ -25,6 +26,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: frontend-service
+  namespace: accommodations-app
 spec:
   type: ClusterIP
   selector:
@@ -32,5 +34,4 @@ spec:
   ports:
     - protocol: TCP
       port: 3000
-      targetPort: 3000
-      # nodePort: 30123
+      targetPort: 80
