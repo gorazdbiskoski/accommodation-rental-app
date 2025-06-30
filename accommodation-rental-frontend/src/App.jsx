@@ -9,7 +9,7 @@ import {AccommodationsPage} from "./ui/pages/AccommodationPage/AccommodationsPag
 function App() {
 
   return (
-      <BrowserRouter>
+      <>
           <Header/>
           <Routes>
               <Route index element={<HomePage/>}/>
@@ -19,7 +19,7 @@ function App() {
               {/*TODO: Implement SignIn and SignInPage*/}
               {/*<Route path={"/signin"} element={<SignInPage/>}></Route>*/}
           </Routes>
-      </BrowserRouter>
+      </>
   )
 }
 
